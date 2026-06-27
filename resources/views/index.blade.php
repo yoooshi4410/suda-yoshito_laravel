@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>商品一覧</title>
-</head>
-
+</head> -->
+@extends('app')
+@section('title','商品一覧')
+@section('content')
 <body>
     <h1>商品一覧</h1>
 
+    <a href="{{ route('create') }}" class="btn btn-success mb-3">新規登録</a>
     <table border="1">
         <thead>
             <tr>
@@ -29,9 +32,13 @@
                 <td>{{$product->description}}</td>
                 <td>{{$product->img_path}}</td>
                 <td>{{$product->price}}</td>
+                <td>
+                    <a href="{{ route('detail',$product->id) }}" class="btn btn-primary">詳細</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </body>
 </html>
+@endsection
