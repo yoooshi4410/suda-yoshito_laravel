@@ -18,4 +18,10 @@ Route::get('/products/{id}',[ProductController::class, 'show'])->name('detail');
 //編集画面
 Route::get('/products/{id}/edit',[ProductController::class, 'edit'])->name('edit');
 //更新処理
-Route::put('/products/{id}',[ProductController::class, 'update'])->name('update');
+Route::put('/mypage/products/{id}',[ProductController::class, 'update'])->name('update');
+//mマイページ
+Route::get('/mypage',[ProductController::class, 'mypage'])->name('mypage');
+//出品商品詳細
+Route::get('/mypage/products/{id}',[ProductController::class, 'mypagedetail'])->name('mypagedetail');
+//削除機能
+Route::delete('/mypage/products/{id}',[ProductController::class, 'destroy'])->name('destroy');

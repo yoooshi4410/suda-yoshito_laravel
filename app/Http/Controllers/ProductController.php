@@ -61,7 +61,30 @@ class ProductController extends Controller
         $product->description=$request->input('description');
 
         $product->save();
-        return redirect()->route('detail',$id);
+        return redirect()->route('mypagedetail',$product->id);
 
     }
+
+    public function mypage()
+    {
+        $products=Product::where('user_id',1)->get();
+
+        return view('mypage',compact('products'));
+    }
+
+    public function mypagedetail($id)
+    {
+        $product=Product::findOrFail($id);
+        return view('mypagedetail',compact('product'));
+    }
+
+    public function destroy($id)
+    {
+        $product=Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('mypage')
+        ->with('success','記事が削除されました');
+    }
+
 }

@@ -12,8 +12,9 @@
     <h1>出品商品編集</h1>
 </body>
 
-    <form action="{{ route('update') }}" method="POST">
+    <form action="{{ route('update',$product->id) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group">
             <label for="text">商品名</label>
             <input type="text" name="product_name" class="form-control" value="{{ $product->product_name }}">
@@ -28,11 +29,11 @@
         </div>
         <div class="form-group">
             <label for="text">商品説明</label>
-            <textarea type="text" name="description"class="form-control"> value="{{ $product->description }}"</textarea>
+            <textarea type="text" name="description"class="form-control">{{ $product->description }}</textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">更新</button>
-        <a href="{{ route('detail',$product->id) }}" class="btn btn-primary">戻る</a>
+        <a href="{{ route('mypagedetail',$product->id) }}" class="btn btn-primary">戻る</a>
 
     </form>
 
