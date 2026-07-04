@@ -16,7 +16,7 @@
 
                 <a href="{{ route('edit',$product->id) }}">編集</a>
 
-                <form action="{{ route('destroy',$product->id) }}" class="POST" style="display:inline-block;">
+                <form action="{{ route('destroy',$product->id) }}" method="POST" style="display:inline-block;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？');">削除</button>

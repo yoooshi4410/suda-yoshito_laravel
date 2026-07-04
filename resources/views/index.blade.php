@@ -13,7 +13,7 @@
 <body>
     <h1>商品一覧</h1>
 
-    <a href="{{ route('create') }}" class="btn btn-success mb-3">新規登録</a>
+
     <table border="1">
         <thead>
             <tr>

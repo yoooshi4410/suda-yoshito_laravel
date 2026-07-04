@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>出品商品編集</title>
-</head>
+@section('title','出品商品詳細')
+
+@section('content')
 
 <body>
     <h1>出品商品編集</h1>
@@ -18,18 +14,38 @@
         <div class="form-group">
             <label for="text">商品名</label>
             <input type="text" name="product_name" class="form-control" value="{{ $product->product_name }}">
+
+            @error('product_name')
+                <p>{{ $message }}</p>
+            @enderror
+
         </div>
         <div class="form-group">
             <label for="number">価格</label>
             <input type="number" name="price" class="form-control" value="{{ $product->price }}">
+
+            @error('price')
+                <p>{{ $message }}</p>
+            @enderror
+
         </div>
         <div class="form-group">
             <label for="number">在庫数</label>
             <input type="number" name="stock" class="form-control" value="{{ $product->stock }}">
+
+            @error('stock')
+                <p>{{ $message }}</p>
+            @enderror
+
         </div>
         <div class="form-group">
             <label for="text">商品説明</label>
             <textarea type="text" name="description"class="form-control">{{ $product->description }}</textarea>
+
+            @error('description')
+                <p>{{ $message }}</p>
+            @enderror
+
         </div>
 
         <button type="submit" class="btn btn-primary">更新</button>
@@ -37,7 +53,7 @@
 
     </form>
 
-</html>
+@endsection
 
 
         

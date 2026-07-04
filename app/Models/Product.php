@@ -26,4 +26,12 @@ class Product extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
+    public function getOtherProduct($user_id)
+    {
+        $products=$this->where('user_id','!=',$user_id)->get();
+
+        return $products;
+    }
+
 }

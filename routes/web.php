@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 //商品一覧
-Route::get('/index',[ProductController::class, 'index']);
+Route::get('/index',[ProductController::class, 'index'])->name('index');
 //商品登録
 Route::get('/products/create',[ProductController::class, 'create'])->name('create');
 //フォーム送信
@@ -25,3 +26,6 @@ Route::get('/mypage',[ProductController::class, 'mypage'])->name('mypage');
 Route::get('/mypage/products/{id}',[ProductController::class, 'mypagedetail'])->name('mypagedetail');
 //削除機能
 Route::delete('/mypage/products/{id}',[ProductController::class, 'destroy'])->name('destroy');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

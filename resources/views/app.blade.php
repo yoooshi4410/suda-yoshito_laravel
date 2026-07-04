@@ -12,7 +12,28 @@
     <!-- ヘッダー部分 -->
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 bg-primary-subtle">
         <!--<h3></h3>-->
+        <div class="col-4">
+        <div class="col-8">
+            @auth
+            ログインユーザー:{{ auth()->user()->name }}
+            @else
+            ゲストユーザー
+            @endauth
+        </div>
+
+        <div class="col">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <a class="btn btn-outline-danger" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            ログアウト
+        </a>
+        </div>
+
     </header>
+    
+
 
     <div class="container">
         <div class="row justify-content-center">
@@ -29,4 +50,5 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
