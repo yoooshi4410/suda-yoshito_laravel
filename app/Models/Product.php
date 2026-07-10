@@ -27,11 +27,31 @@ class Product extends Model
         return $this->hasMany(Sale::class);
     }
 
-    public function getOtherProduct($user_id)
+
+    public function getOwnProduct($user_id)
     {
-        $products=$this->where('user_id','!=',$user_id)->get();
+        $products=$this->where('user_id',$user_id)->get();
 
         return $products;
+    }
+
+    public function getOtherProduct($user_id, $keyword = null, $min_price = null, $max_price = null)
+    {
+        $query=$this->where('user_id','!=',$user_id);
+
+        if (!empty($keyword)) {
+            $query->where('product_name','like','%'.$keyword.'%');
+        }
+
+        if (!empty($min_price)) {
+            $query->where('price','>=',$min_price);
+        }
+
+        if (!empty($max_price)) {
+            $query->where('price','<=',$max_price);
+        }
+
+        return $query->get();
     }
 
 }

@@ -10,7 +10,7 @@
             
                 <p>商品名:{{ $product->product_name }}</p>
                 <p>説明:{{ $product->description }}</p>
-                <p>画像:{{$product->img_path}}</p>
+                <p>画像:</p><img src="{{ asset('storage/'.$product->img_path) }}" width="100">
                 <p>金額:{{$product->price}}</p>
                 <p>会社:{{$product->company}}</p>
 

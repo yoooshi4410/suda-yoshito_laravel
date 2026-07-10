@@ -8,7 +8,7 @@
     <h1>商品登録画面</h1>
 </body>
 
-    <form action="{{ route('store') }}" method="POST">
+    <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="text">商品名</label>
@@ -45,6 +45,14 @@
                 <p>{{ $message }}</p>
             @enderror
 
+        </div>
+
+        <div class="form-group">
+            <label for="image">画像</label>
+            <input type="file" name="image" id="image" class="form-control">
+            @error('image')
+        
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">登録</button>

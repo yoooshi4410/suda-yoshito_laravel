@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -29,3 +30,8 @@ Route::delete('/mypage/products/{id}',[ProductController::class, 'destroy'])->na
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//購入画面へ
+Route::get('/products/{id}/purchase',[SaleController::class, 'confirm'])->name('confirm');
+
+Route::post('/products/purchase',[SaleController::class, 'purchase'])->name('purchase');
+

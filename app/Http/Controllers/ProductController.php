@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -18,11 +19,16 @@ class ProductController extends Controller
     }
 
     //商品一覧
-    public function index()
+    public function index(Request $request)
     {
         $user_id=Auth::id();
 
-        $products = $this->product->getOtherProduct($user_id);
+        $products = $this->product->getOtherProduct(
+            $user_id,
+            $request->keyword,
+            $request->min_price,
+            $request->max_price
+        );
 
         return view('index',compact('products'));
     }
@@ -41,13 +47,22 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->description = $request->description;
 
+        //画像処理
+        if ($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('images','public');
+            $product->img_path = $imagePath;
+        }else{
+            $product->img_path='';
+        }
+
         $product->user_id=Auth::id();
         $product->company_id=1;
-        $product->img_path='';
 
         $product->save();
         return redirect('/mypage');
     }
+
+    
 
 
     //詳細画面
@@ -73,6 +88,13 @@ class ProductController extends Controller
         $product->price=$request->input('price');
         $product->stock=$request->input('stock');
         $product->description=$request->input('description');
+
+        if($product->img_path){
+            Storage::delete('public/'.$product->img_path);
+        
+        $imagePath=$request->file('image')->store('images','public');
+        $product->img_path=$imagePath;
+        }
 
         $product->save();
         return redirect()->route('mypagedetail',$product->id);
@@ -110,5 +132,6 @@ class ProductController extends Controller
         ->with('success','記事が削除されました');
     }
 
+    
 
 }
