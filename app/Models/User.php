@@ -38,4 +38,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //いいねとのリレーションを定義
+    public function likes()
+    {
+        //1つの商品に対して「いいね」は複数(多)
+        return $this->hasMany(Like::class);
+    }
 }

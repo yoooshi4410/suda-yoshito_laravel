@@ -1,12 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>商品一覧</title>
-</head> -->
 @extends('app')
 @section('title','商品一覧')
 @section('content')
@@ -17,11 +8,11 @@
             <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="商品名を入力">
             <input type="number" name="min_price" value="{{ request('min_price') }}" placeholder="最低価格">
             <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="最高価格">
-            <button type="submit">検索</button>
+            <button class="search" type="submit">検索</button>
         </form>
 
 
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>商品番号</th>

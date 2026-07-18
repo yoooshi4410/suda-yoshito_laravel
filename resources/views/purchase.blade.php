@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('app')
+@section('title','購入画面')
+@section('content')
 
 <head>
     <meta charset="UTF-8">
@@ -42,4 +43,4 @@
 
         
 </body>
-</html>
+@endsection

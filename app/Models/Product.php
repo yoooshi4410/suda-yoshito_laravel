@@ -17,11 +17,7 @@ class Product extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
-
+   
     public function sales()
     {
         return $this->hasMany(Sale::class);
@@ -53,5 +49,32 @@ class Product extends Model
 
         return $query->get();
     }
+
+    //いいねとのリレーションを定義
+    public function likes()
+    {
+        //1つのブログに対して「いいね」は複数(多)
+        return $this->hasMany(Like::class);
+    }
+
+    //特定のユーザーがその商品に対して「いいね」をしているかどうかを確認
+    public function likedBy(User $user)
+    {
+        //特定のユーザーが現在の商品に対して「いいね」しているか確認し、
+        //現在の商品に関する「いいね」のリレーションを返却する
+        return $this->likes()->where('user_id',$user->id)->exists();
+    }
+
+    public function getPurchasedProducts($user_id)
+    {
+        return $this
+            ->join('sales','products.id','=','sales.product_id')
+            ->where('sales.user_id',$user_id)
+            ->select('products.*','sales.quantity')
+            ->orderBy('sales.created_at')
+            ->get();
+    }
+
+    
 
 }

@@ -89,11 +89,14 @@ class ProductController extends Controller
         $product->stock=$request->input('stock');
         $product->description=$request->input('description');
 
-        if($product->img_path){
-            Storage::delete('public/'.$product->img_path);
-        
-        $imagePath=$request->file('image')->store('images','public');
-        $product->img_path=$imagePath;
+        if($request->hasFile('image')){
+
+            if($product->img_path){
+                Storage::delete('public/'.$product->img_path);
+            }
+            
+            $imagePath=$request->file('image')->store('images','public');
+            $product->img_path=$imagePath;
         }
 
         $product->save();
@@ -106,9 +109,20 @@ class ProductController extends Controller
     {
         // $products=Product::where('user_id',1)->get();
         $user_id=Auth::id();
+        $user=Auth::user();
         $products=$this->product->getOwnProduct($user_id);
+        $purchasedProducts=$this->product->getPurchasedProducts($user_id);
 
-        return view('mypage',compact('products'));
+        return view('mypage',compact('products','user','purchasedProducts'));
+
+        // return Product::join('sales','product.id','=','sales.product_id')
+        //     ->where('sales.user_id',$user_id)
+        //     ->orderBy('sales.clcreated_at')
+        //     ->select('products.*','sales.quantity','sales.created_at')->get();
+
+
+
+
     }
 
     //出品商品詳細

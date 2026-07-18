@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -34,4 +37,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/products/{id}/purchase',[SaleController::class, 'confirm'])->name('confirm');
 
 Route::post('/products/purchase',[SaleController::class, 'purchase'])->name('purchase');
+//イイね追加
+Route::post('/products/{product}/like',[LikeController::class, 'likeProduct'])->middleware('auth');
+//イイね削除
+Route::delete('/products/{product}/like',[LikeController::class, 'unlikeProduct'])->middleware('auth');
+//アカウント情報編集
+Route::middleware('auth')->group(function(){
+    Route::get('/mypage/account_edit',[UserController::class, 'account'])->name('account');
+});
+//アカウント情報更新処理
+Route::put('/account_update',[UserController::class, 'userupdate'])->name('userupdate');
+//お問い合わせフォーム画面
+Route::get('/contact',[ContactController::class, 'showForm'])->name('contact.form');
+//お問い合わせフォーム送信
+Route::post('/contact',[ContactController::class, 'submitForm'])->name('contact.submit');
+
+
+
 
