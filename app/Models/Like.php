@@ -13,7 +13,7 @@ class Like extends Model
 
     public function product()
     {
-        return $this->belongsTo(Blog::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()

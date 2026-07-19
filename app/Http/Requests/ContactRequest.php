@@ -16,12 +16,12 @@ class ContactRequest extends FormRequest
         ];
     }
 
-    public function messaegs()
+    public function messages()
     {
         //各バリデーションルールに対するエラーメッセージ
         return[
             'name.required'=>'名前は必須です',
-            'email.max'=>'名前は255文字以内で入力してください',
+            'name.max'=>'名前は255文字以内で入力してください',
             'email.required'=>'Eメールは必須です',
             'email.max'=>'Eメールは255文字以内で入力してください',
             'message.required'=>'内容は必須です',
