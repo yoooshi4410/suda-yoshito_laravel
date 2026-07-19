@@ -16,7 +16,7 @@ class ContactRequest extends FormRequest
         ];
     }
 
-    public function messaeg()
+    public function messaegs()
     {
         //各バリデーションルールに対するエラーメッセージ
         return[
